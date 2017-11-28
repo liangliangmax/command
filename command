@@ -33,3 +33,13 @@ centos minimal 安装桌面: yum -y groups install "GNOME Desktop"
 centos minimal 进入图形桌面: startx
 
 centos minimal 退出图形界面: ctrl+alt+F2
+
+linux 命令行加载网卡驱动
+
+查看是否安装网卡驱动打开终端，输入ifconfig –a
+
+启动网卡 ifconfig eth0 up 
+
+自动获取ip dhclient eth0
+
+手动获取ip 
