@@ -43,3 +43,32 @@ linux 命令行加载网卡驱动
 自动获取ip dhclient eth0
 
 手动获取ip 
+
+
+
+centoos7 安装rabbitmq
+1、wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+2、rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+3、yum install epel-release
+4、yum install erlang
+5、wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6-1.el7.noarch.rpm
+6、yum install rabbitmq-server-3.6.6-1.el7.noarch.rpm
+完成后启动服务：
+7、service rabbitmq-server start
+可以查看服务状态：
+8、service rabbitmq-server status
+9、rabbitmq-plugins enable rabbitmq_management
+10、curl http://localhost:15672
+打开15672端口
+11、firewall-cmd --add-port=15672/tcp --permanent
+打开5672端口
+12、firewall-cmd --add-port=5672/tcp --permanent
+13、rabbitmqctl  add_user  luke luke
+14、rabbitmqctl  set_user_tags  luke  administrator
+15、cd /usr/lib/rabbitmq/lib/rabbitmq_server-3.6.6/plugins
+16、wget https://dl.bintray.com/rabbitmq/community-plugins/rabbitmq_delayed_message_exchange-0.0.1.ez
+17、rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+
+centos7 关闭防火墙
+sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service
