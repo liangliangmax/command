@@ -92,12 +92,9 @@ Mysql5.7默认安装之后root是有密码的。
 为了加强安全性，MySQL5.7为root用户随机生成了一个密码，在error log中，关于error log的位置，如果安装的是RPM包，则默认是/var/log/mysqld.log。
 只有启动过一次mysql才可以查看临时密码
 grep 'temporary password' /var/log/mysqld.log
-
 8.修改密码
 set global validate_password_policy=0;
 set global validate_password_length=1;
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
-
-sudo rpm -Uvh mysql57-community-release-el7-10.noarch.rpm
