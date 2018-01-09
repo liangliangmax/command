@@ -72,3 +72,32 @@ centoos7 安装rabbitmq
 
 centos7 关闭防火墙
 sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service
+
+
+centos7 安装mysql5.7
+2、下载 Mysql yum包
+wget http://repo.mysql.com/mysql57-community-release-el7-10.noarch.rpm
+3、安转软件源
+sudo rpm -Uvh mysql57-community-release-el7-10.noarch.rpm
+4、安装mysql服务端
+yum install -y mysql-community-server
+5、启动mysql
+service mysqld start
+systemctl start mysqld.service
+6、检查mysql 的运行状态
+service mysqld status
+7、修改临时密码
+Mysql5.7默认安装之后root是有密码的。
+7.1 获取MySQL的临时密码
+为了加强安全性，MySQL5.7为root用户随机生成了一个密码，在error log中，关于error log的位置，如果安装的是RPM包，则默认是/var/log/mysqld.log。
+只有启动过一次mysql才可以查看临时密码
+grep 'temporary password' /var/log/mysqld.log
+
+8.修改密码
+set global validate_password_policy=0;
+set global validate_password_length=1;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+sudo rpm -Uvh mysql57-community-release-el7-10.noarch.rpm
