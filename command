@@ -18,6 +18,9 @@ source d://rp.sql
 docker build -t zingdocker/jdk-tomcat .
 docker run -d -p 8090:8080 zingdocker/jdk-tomcat
 
+删除tag为none的images
+docker images |grep none |awk '{print $3}'|xargs docker rmi
+
 #git操作
 #拉取远程的分支代码
 git pull origin max-translia/webpurify
