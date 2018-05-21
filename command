@@ -108,3 +108,11 @@ set global validate_password_length=1;
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+
+
+
+docker私服搭建
+1.抽取最新的仓库镜像
+docker pull registry 
+2.启动仓库
+docker run -d -p 5000:5000 -v /root/registry:/var/lib/registry --name registry --restart=always registry
