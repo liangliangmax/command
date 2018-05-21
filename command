@@ -21,6 +21,13 @@ docker run -d -p 8090:8080 zingdocker/jdk-tomcat
 删除tag为none的images
 docker images |grep none |awk '{print $3}'|xargs docker rmi
 
+docker ps -a // 查看所有容器
+$ docker ps -a -q // 查看所有容器ID
+
+$ docker stop $(docker ps -a -q) //  stop停止所有容器
+$ docker  rm $(docker ps -a -q) //   remove删除所有容器
+
+
 #git操作
 #拉取远程的分支代码
 git pull origin max-translia/webpurify
