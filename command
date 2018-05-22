@@ -116,3 +116,5 @@ docker私服搭建
 docker pull registry 
 2.启动仓库
 docker run -d -p 5000:5000 -v /root/registry:/var/lib/registry --name registry --restart=always registry
+3.查看仓库中的镜像名称
+curl -XGET http://192.168.1.8:5000/v2/_catalog
