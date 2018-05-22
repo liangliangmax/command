@@ -127,3 +127,6 @@ curl -XGET http://192.168.1.8:5000/v2/nginx/tags/list
 }
 #systemctl daemon-reload 
 #systemctl restart docker
+6.提交本地镜像
+docker tag inits/nginx1.8 192.168.226.138:5000/nginx1.8:latest
+docker push 192.168.226.138:5000/nginx1.8:latest
