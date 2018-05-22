@@ -118,3 +118,5 @@ docker pull registry
 docker run -d -p 5000:5000 -v /root/registry:/var/lib/registry --name registry --restart=always registry
 3.查看仓库中的镜像名称
 curl -XGET http://192.168.1.8:5000/v2/_catalog
+4.查看仓库某个镜像的所有版本号
+curl -XGET http://192.168.1.8:5000/v2/nginx/tags/list
