@@ -120,3 +120,10 @@ docker run -d -p 5000:5000 -v /root/registry:/var/lib/registry --name registry -
 curl -XGET http://192.168.1.8:5000/v2/_catalog
 4.查看仓库某个镜像的所有版本号
 curl -XGET http://192.168.1.8:5000/v2/nginx/tags/list
+5.如果提示要安全连接，修改/etc/docker/daemon.json文件
+#vi /etc/docker/daemon.json
+{
+    "insecure-registries": ["192.168.226.138:5000"] 
+}
+#systemctl daemon-reload 
+#systemctl restart docker
