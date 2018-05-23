@@ -130,3 +130,13 @@ curl -XGET http://192.168.1.8:5000/v2/nginx/tags/list
 6.提交本地镜像
 docker tag inits/nginx1.8 192.168.226.138:5000/nginx1.8:latest
 docker push 192.168.226.138:5000/nginx1.8:latest
+
+
+
+ubuntu下用户提升到root权限
+1.打开超级终端，输入指令sudo gedit /etc/passwd ，回车
+2.找到我们用户名所在的那一行，将里面的当前用户的ID值进行修改。譬如我的当前用户是crystal。
+则找到了   crystal:x:1000:1000:crystal:/home/linuxidc:/bin/bash   将两个1000改成0即可。
+3.即最后改完的结果为：
+crystal:x:0:0:crystal:/home/linuxidc:/bin/bash  
+4.最后将Ubuntu系统进行注销，然后在登陆的用户名里输入 你自己的用户名和密码，这样登陆上来就是root权限了。这是因为root的ID值为0。
