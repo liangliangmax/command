@@ -79,6 +79,8 @@ centoos7 安装rabbitmq
 16、wget https://dl.bintray.com/rabbitmq/community-plugins/rabbitmq_delayed_message_exchange-0.0.1.ez
 17、rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
+如果提示failed start rabbitmq
+/var/lib/rabbitmq/mnesia 目录下存在rabbit@localhost.pid、rabbit@localhost、rabbit@localhost-plugins-expand，删除这3项后，再使用systemctl start rabbitmq-server启动，发现不报错了。
 
 centos7 关闭防火墙
 sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service
