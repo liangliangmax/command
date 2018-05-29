@@ -54,6 +54,16 @@ linux 命令行加载网卡驱动
 
 手动获取ip 
 
+centos7下网卡不能启动，报network.service - LSB: Bring up/down networking
+试一下：
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+Removed symlink /etc/systemd/system/multi-user.target.wants/NetworkManager.service.
+Removed symlink /etc/systemd/system/dbus-org.freedesktop.NetworkManager.service.
+Removed symlink /etc/systemd/system/dbus-org.freedesktop.nm-dispatcher.service.
+重新启动网络：
+systemctl start network.service
+ifconfig |grep eno
 
 
 centoos7 安装rabbitmq
