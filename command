@@ -162,3 +162,19 @@ ubuntu下用户提升到root权限
 3.即最后改完的结果为：
 crystal:x:0:0:crystal:/home/linuxidc:/bin/bash  
 4.最后将Ubuntu系统进行注销，然后在登陆的用户名里输入 你自己的用户名和密码，这样登陆上来就是root权限了。这是因为root的ID值为0。
+
+
+
+spring中的注入：
+@Resources：
+
+@Resource(name = "tiger")
+private Tiger tiger;
+
+@Resource(type = Monkey.class)
+private Monkey monkey;
+
+//默认按类型注入，如果想按名称注入，加上@Qualifier即可
+@Autowired
+@Qualifier("BMW")
+private Car car;
