@@ -136,3 +136,7 @@ Web容器中DefaultServlet详解
     MVC定义的一个类似于Tomcat的DefaultServlet的DefaultServletHttpRequestHandler类。
 
     <mvc:default-servlet-handler />
+    
+    
+    
+    https://blog.csdn.net/qq_30920821/article/details/78328608
