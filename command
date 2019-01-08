@@ -131,6 +131,62 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
+---------------------------------------------
+安装redis
+1、检查是否有redis yum 源
+
+yum install redis
+2、下载fedora的epel仓库
+
+yum install epel-release
+3、安装redis数据库
+
+yum install redis
+4、安装完毕后，使用下面的命令启动redis服务
+
+# 启动redis
+service redis start
+# 停止redis
+service redis stop
+# 查看redis运行状态
+service redis status
+# 查看redis进程
+ps -ef | grep redis
+5、设置redis为开机自动启动
+
+chkconfig redis on
+6、进入redis服务
+
+# 进入本机redis
+redis-cli
+# 列出所有key
+keys *
+
+7、防火墙开放相应端口
+
+# 开启6379
+/sbin/iptables -I INPUT -p tcp --dport 6379 -j ACCEPT
+# 开启6380
+/sbin/iptables -I INPUT -p tcp --dport 6380 -j ACCEPT
+# 保存
+/etc/rc.d/init.d/iptables save
+# centos 7下执行
+service iptables save
+
+修改redis默认端口和密码
+
+1、打开配置文件
+
+vi /etc/redis.conf
+2、修改默认端口，查找 port 6379 修改为相应端口即可
+
+3.修改默认密码，查找 requirepass foobared 将 foobared 修改为你的密码
+4、使用配置文件启动 redis
+
+redis-server /etc/redis.conf &
+5、使用端口登录
+
+redis-cli -h 127.0.0.1 -p 6179
 
 
 docker私服搭建
