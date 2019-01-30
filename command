@@ -132,6 +132,15 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mypassword' WITH GRANT 
 FLUSH PRIVILEGES;
 
 ---------------------------------------------
+MYSQL5.7版本sql_mode=only_full_group_by问题
+select @@sql_mode;
+
+这样就可以查出sql_mode的值，复制这个值，在my.cnf中添加配置项（把查询到的值删掉only_full_group_by这个选项，其他的都复制过去）：
+
+sql_mode=STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION;
+如果 [mysqld] 这行被注释掉的话记得要打开注释。然后重重启mysql服务
+
+---------------------------------------------
 安装redis
 1、检查是否有redis yum 源
 
