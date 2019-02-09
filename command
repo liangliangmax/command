@@ -27,6 +27,10 @@ $ docker ps -a -q // 查看所有容器ID
 $ docker stop $(docker ps -a -q) //  stop停止所有容器
 $ docker  rm $(docker ps -a -q) //   remove删除所有容器
 
+docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker stop
+docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker rm
+docker images|grep none|awk '{print $3 }'|xargs docker rmi
+
 
 #git操作
 #拉取远程的分支代码
