@@ -29,7 +29,7 @@ $ docker  rm $(docker ps -a -q) //   remove删除所有容器
 
 docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker stop
 docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker rm
-docker images|grep none|awk '{print $3 }'|xargs docker rmi
+docker images|grep none|awk '{print $3 }'|xargs docker rmi -f
 
 docker rmi `docker images -q` //删除所有镜像
 
