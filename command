@@ -248,3 +248,6 @@ private Monkey monkey;
 @Autowired
 @Qualifier("BMW")
 private Car car;
+
+linux 查看哪个文件占用过高
+du -h -x --max-depth=1 
