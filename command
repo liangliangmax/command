@@ -1,3 +1,13 @@
+#maven单独打包命令
+mvn clean package -pl 模块名称 -am --also-make
+
+参数说明：
+
+-am --also-make 同时构建所列模块的依赖模块；
+-amd -also-make-dependents 同时构建依赖于所列模块的模块；
+-pl --projects 构建制定的模块，模块间用逗号分隔；
+-rf -resume-from 从指定的模块恢复反应堆。
+
 #通过scp上传文件
 scp /home/liang/Downloads/node-v8.6.0.tar.gz  root@42.202.130.7:/root/liang/node
 
