@@ -261,3 +261,51 @@ private Car car;
 
 linux 查看哪个文件占用过高
 du -h -x --max-depth=1 
+
+
+
+//安装centos 的java环境
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo mkdir -p /etc/docker 
+sudo tee /etc/docker/daemon.json <<-'EOF' 
+{ 
+	"registry-mirrors": ["https://tq1krekn.mirror.aliyuncs.com"] 
+} 
+EOF 
+
+sudo systemctl daemon-reload 
+sudo systemctl restart docker
+
+yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
+
+dirname $(readlink $(readlink $(which java)))
+
+vi /etc/profile
+
+export JAVA_HOME=上面dirname命令获取到的路径，不要jre/bin最后这段
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
+source /etc/profile
+
+cd /opt/
+
+wget https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+
+tar -zxvf apache-maven-3.6.3-bin.tar.gz
+
+mv apache-maven-3.6.3 maven
+
+
+vi /etc/profile
+
+export M2_HOME=/opt/maven
+
+export PATH=$PATH:$M2_HOME/bin
+
+source /etc/profile
