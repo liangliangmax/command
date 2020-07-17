@@ -309,3 +309,28 @@ export M2_HOME=/opt/maven
 export PATH=$PATH:$M2_HOME/bin
 
 source /etc/profile
+
+
+//安装mongo
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
+
+//连接mongo
+mongo
+
+//切换数据库
+use hsgy
+
+db.createUser(
+    {
+        user: "admin",
+        pwd: "admin",
+        roles: [
+            { role: "readWrite",
+                db: "hsgy"
+            }
+        ]
+    }
+)
+
+//进行登录，如果返回1，则认证成功
+db.auth("admin","admin")
