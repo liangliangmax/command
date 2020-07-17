@@ -314,8 +314,28 @@ source /etc/profile
 //安装mongo
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
 
+1、touch /etc/yum.repos.d/mongodb-org-4.2.repo
+
+2、
+[mongodb-org-4.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
+
+3、sudo yum install -y mongodb-org
+
+4、vi /etc/mongod.conf
+
+5、修改绑定的ip地址
+
+6、sudo systemctl daemon-reload
+
+7、sudo systemctl start mongod
+
 //连接mongo
-mongo
+8、mongo
 
 //切换数据库
 use hsgy
