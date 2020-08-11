@@ -9,6 +9,9 @@ $(".comment-box").remove();
 $(".recommend-box").remove();
 $(".recommend-right").remove();
 $(".tool-box").remove();
+$("#toolBarBox").remove();
+$(".bottom-pub-footer").remove();
+$(".template-box").remove();  
 
 $(".btn-readmore").click();
 
