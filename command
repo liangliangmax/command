@@ -1,5 +1,6 @@
 #maven单独打包命令
-mvn clean package -pl 模块名称 -am --also-make
+mvn clean package -pl 模块名称 -am
+mvn clean package -pl app-data/模块名称 -am
 
 参数说明：
 
