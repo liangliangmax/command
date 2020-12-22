@@ -268,7 +268,7 @@ du -h -x --max-depth=1
 //安装centos 的java环境
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 
-sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
 
