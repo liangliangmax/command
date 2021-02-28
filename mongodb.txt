@@ -1,0 +1,24 @@
+1.下载mongodb的源码，然后解压
+2.设置虚拟内存：8G
+  sudo dd if=/dev/zero of=/swapfile bs=64M count=128
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+
+  卸载虚拟内存
+  sudo swapoff /swapfile
+  sudo rm /swapfile
+
+3.安装必要依赖
+  sudo apt-get install gcc
+  sudo apt-get install clang
+  sudo apt-get install libcurl4-openssl-dev
+  sudo apt-get install libcurl4-nss-dev
+  sudo apt-get install libcurl4-gnutls-dev
+  sudo apt-get install libssl-dev
+  sudo apt install libcurl-dev
+  sudo pip3 install pyyaml
+  sudo pip3 install Cheetah3
+  
+
+4.执行编译
+  sudo python3 buildscripts/scons.py DESTDIR=/opt/mongo install-mongod CFLAGS="-march=armv8-a+crc -mtune=generic"
