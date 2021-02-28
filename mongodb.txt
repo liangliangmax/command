@@ -9,6 +9,7 @@
   sudo rm /swapfile
 
 3.安装必要依赖
+  sudo apt-get install build-essential
   sudo apt-get install gcc
   sudo apt-get install clang
   sudo apt-get install libcurl4-openssl-dev
