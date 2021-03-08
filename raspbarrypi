@@ -1,6 +1,35 @@
 安装完成后
-sudo apt update
-sudo apt upgrade
+1. 设置软件源
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
+
+编辑 /etc/apt/sources.list 文件（软件源），参考如下命令：
+sudo nano /etc/apt/sources.list
+
+删除原文件所有内容，buster 系统用以下内容取代：
+deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+
+Ctrl+o 保存，之后回车确认，然后 Ctrl+x 退出。
+
+编辑 /etc/apt/sources.list.d/raspi.list 文件（系统更新源），参考如下命令：
+
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+#deb-src http://archive.raspberrypi.org/debian/ stretch main ui
+
+Ctrl+o 保存，之后回车确认，然后 Ctrl+x 退出。
+
+#更新软件源列表
+sudo apt-get update
+#更新软件版本
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+#更新系统内核
+sudo rpi-update
+
+wget http://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
+
 sudo apt-get install --reinstall raspberrypi-bootloader raspberrypi-kernel
 
 
