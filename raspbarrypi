@@ -1,0 +1,9 @@
+安装完成后
+sudo apt update
+sudo apt upgrade
+sudo apt-get install --reinstall raspberrypi-bootloader raspberrypi-kernel
+
+
+sudo raspi-config
+
+
