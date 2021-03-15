@@ -36,3 +36,36 @@ sudo apt-get install --reinstall raspberrypi-bootloader raspberrypi-kernel
 sudo raspi-config
 
 
+
+=============安装docker=======================
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+
+sudo add-apt-repository \
+   "deb [arch=arm64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+or ==============================================================================
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+sudo docker pull arm64v8/mongo
+sudo docker pull arm64v8/rabbitmq
+sudo docker pull arm64v8/node:14.16.0-alpine3.12
+sudo docker pull arm64v8/redis:5.0.11-alpine3.1
+sudo docker pull arm64v8/zookeeper
+sudo docker pull arm64v8/openjdk:11.0.10-jdk-slim
