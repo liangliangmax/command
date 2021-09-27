@@ -1,0 +1,40 @@
+//安装gcc 8
+sudo yum install centos-release-scl
+sudo yum install devtoolset-8
+scl enable devtoolset-8 bash
+source /opt/rh/devtoolset-8/enable
+
+临时编译前使用高版本gcc (GCC) 8.3.1 20190311 (推荐使用这个方法)
+export CC=/opt/rh/devtoolset-8/root/usr/bin/gcc
+export CPP=/opt/rh/devtoolset-8/root/usr/bin/cpp
+export CXX=/opt/rh/devtoolset-8/root/usr/bin/c++
+
+
+whereis gcc
+
+mv /usr/bin/gcc /usr/bin/gcc-4.8.5
+ln -s /opt/rh/devtoolset-8/root/usr/bin/gcc /usr/bin/gcc
+
+mv /usr/bin/g++ /usr/bin/g++-4.8.5
+ln -s /opt/rh/devtoolset-8/root/usr/bin/g++ /usr/bin/g++
+
+mv /usr/bin/c++ /usr/bin/c++-4.8.5
+ln -s /opt/rh/devtoolset-8/root/usr/bin/c++ /usr/bin/c++
+
+
+//安装python3
+yum install -y epel-release
+yum install -y python3 python3-devel
+pip3 install --upgrade pip
+
+//编译mongodb
+python3 -m pip install -r etc/pip/compile-requirements.txt
+
+yum install -y xz-devel
+yum -y install libcurl-devel
+
+python3 buildscripts/scons.py DESTDIR=/opt/mongo install-mongod
+
+
+
+
