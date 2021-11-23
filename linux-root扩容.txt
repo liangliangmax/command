@@ -1,0 +1,25 @@
+Linux服务器/dev/mapper/centos-root 动态扩容
+
+背景
+/dev/mapper/centos-root   50G   47G  4.0G  93% /
+/dev/vda1               1014M  284M  731M  28% /boot
+/dev/mapper/centos-home  134G   33M  134G   1% /home
+
+
+tar cvf /run/home.tar /home
+
+fuser -km /home
+umount /home
+lvremove /dev/mapper/centos-home
+
+lvextend -L +100G /dev/mapper/centos-root
+xfs_growfs /dev/mapper/centos-root
+
+lvcreate -L 30G -n/dev/mapper/centos-home
+
+mkfs.xfs  /dev/mapper/centos-home
+mount /dev/mapper/centos-home
+
+
+tar xvf /run/home.tar -C /
+rm -rf /run/home.tar
