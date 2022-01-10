@@ -1,0 +1,2 @@
+docker pull linuxserver/webtop
+docker run -d --name=webtop \-e PUID=1000 -e PGID=1000 \-e TZ=Asia/Shanghai \-p 8083:3000 \-v /usr/local/webtop:/config \--shm-size="1gb" \--restart unless-stopped \linuxserver/webtop
