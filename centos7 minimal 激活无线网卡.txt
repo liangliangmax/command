@@ -1,0 +1,84 @@
+CentOS 配置无线网络，开启wifi
+背景：一台老笔记本安装CentOS7.x，最小安装模式，安装后无法开启wifi
+
+1、先用NetworkManager包的nmcli命令检查网卡，发现无线网卡wlo1信息里有个错误plugin missing，Ethernet正常，先配置以太网，保证能连上外网后，然后再解决无线网络
+
+配置以太网大约是：按刚才nmcli命令显示的网络名字找到配置文件，假设是ens33
+
+复制代码
+ls /etc/sysconfig/network-scripts/
+里面ifcfg开头的ifcfg-ens33就是
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+大约配置是：
+TYPE=Ethernet #网络类型为：Ethernet以太网
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none #设置为none禁止DHCP，设置为static启用静态IP地址，设置为dhcp开启DHCP服务
+DEFROUTE=yes  #默认网卡
+IPV4_FAILURE_FATAL=no
+##IPV6INIT=yes
+##IPV6_AUTOCONF=yes
+##IPV6_DEFROUTE=yes
+##IPV6_FAILURE_FATAL=no
+##IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33 #定义网络设备名称
+UUID=45fe5552-7117-4c84-9742-c87adfa222b9
+DEVICE=ens33 #指出设备名称
+ONBOOT=yes #设置为yes，开机自动启用网络连接
+ZONE=public
+IPADDR=192.168.31.10
+NETMASK=255.255.255.0
+GATEWAY=192.168.31.2
+DNS1=192.168.31.2
+复制代码
+复制代码
+DEFROUTE(默认线路——默认网卡)
+
+如果有多个网卡，比如eth0、eth1，就有可能会出现这样的情况：
+
+系统默认路由选择eth0网卡，而实际使用的是eth1网卡
+
+这个时候就需要配置DEFROUTE参数，在eth1的配置文件内加上DEFROUTE=yes
+复制代码
+配置后重启网络，或者重启设备，以太网可以正常连接外网。
+
+2、安装NetworkManager-wifi
+
+yum -y install NetworkManager-wifi
+安装完后，reboot，wifi网卡应该已经启动，如果未启动执行nmcli r wifi on#开启无线网
+3、配置wifi
+
+复制代码
+#系统内置网络配置界面
+nmtui
+
+#扫描可用于连接wifi
+nmcli dev wifi 
+ 
+#添加一个wifi的连接
+nmcli dev wifi con “无线网络名称” password “无线网络密码” name “任意连接名称（删除，修改时用）”
+
+#添加成功后查看已创建的wifi连接
+nmcli conn
+
+#如果wifi没有连接上
+
+nmcli con up wifi连接名（刚才nmtui创建的连接）
+
+ 
+
+#修改该连接为开机自动连接
+
+nmcli con mod wifi连接名 connection.autoconnect yes
+
+复制代码
+4、如果只启用wifi，那么需要关闭以太网，把ONBOOT=no，否则没插网线的情况下，路由可能还是走的以太网。
+
+     如果需要配置wifi的静态IP，关键部分基本和以太网的一样。
+
+5、其他情况：如果无线网卡安装不正常，可以lspci命令查看网卡型号，使用lspci命令需要先安装yum -y install pciutils*
+
+     查看设备后下载相应的驱动程序进行安装
+
+# 查询内核日志，查看是否需要安装无线网卡的固件
+ dmesg | grep firmware
